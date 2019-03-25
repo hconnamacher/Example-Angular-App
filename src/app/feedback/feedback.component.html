@@ -1,0 +1,24 @@
+<h2>Feedback</h2>
+
+  <app-usersurvey></app-usersurvey>
+
+  <hr />
+
+  <form [formGroup] = "messageForm" (ngSubmit) = "onSubmit()">
+     Favorite Color: <input type="text" [formControl]="favoriteColorControl"><br />
+     <label>List your favorite pet: <span *ngIf="submitted && pet().errors">Please enter a pet</span><br>
+       <input type="radio" formControlName="pet" value="dog">Dog<br>
+       <input type="radio" formControlName="pet" value="cat">Cat<br>
+       <input type="radio" formControlName="pet" value="none">None
+     </label>
+     <br>
+     <Label>Enter your password:
+       <input type="password" formControlName="password"><br />
+       <span *ngIf="password().errors">Please enter a longer password</span>
+     </Label>
+     <br>
+     <input type="submit" value="sendMessage">
+     <input type="reset">
+     <br />
+    <br />
+  </form>

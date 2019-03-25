@@ -1,0 +1,15 @@
+<form ngSubmit='editProject()'>
+<div class="listing">
+<span (click)='toggleDisplay()' class="badge" [class.selected]='displayAll'>Project {{project.id}}: </span>
+ {{project.name}}
+ </div><br />
+<div *ngIf='displayAll' class="details">
+  <label>ID: {{project.id}}</label><br />
+  <label>Name: <input type="text" [formControl]='nameField'></label><br />
+  <label>User: <input type="text" [formControl]='userField' class="short">
+  <span *ngIf='user'>{{user.fname}} {{user.lname}}</span></label><br />
+  <label>Deadline: <input type="datetime-local" [formControl]='deadlineField'></label><br />
+  <input type="submit" value="Update">
+  <button (click)="resetProject()">Reset</button>
+</div>
+</form>

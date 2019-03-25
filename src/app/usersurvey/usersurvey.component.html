@@ -1,0 +1,19 @@
+<form [formGroup] = "userProfile">
+  <label>First name: <input type="text" formControlName="firstName"></label>
+  <label>Last name: <input type="text" formControlName="lastName"></label>
+  <div formGroupName="address">
+    <label>Street: <input type="text" formControlName="street"></label>
+    <label>City: <input type="text" formControlName="city"></label>
+    <label for="state" *ngIf="userProfile.value.address.country === 'United States'">State: </label>
+    <label for="state" *ngIf="userProfile.value.address.country === 'Canada'">Province: </label>
+    <select id="state" formControlName="state">
+      <option *ngFor="let state of states">{{state}}</option>
+    </select>
+    <label for="country">Country</label>
+    <select id="country" formControlName="country">
+      <option>Canada</option>
+      <option>United States</option>
+    </select>
+  </div>
+ 
+</form>
