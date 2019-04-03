@@ -1,3 +1,4 @@
+/* The script to control the form for entering user name and address */
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -11,9 +12,11 @@ import { FormService } from '../form.service';
 })
 export class UsersurveyComponent implements OnInit {
 
+  /* A list of state/province abbreviations, and the entered country */
   public states: string[];
   public myCountry: string;
 
+  /* Organizes the form used to enter data */
   userProfile = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -25,10 +28,11 @@ export class UsersurveyComponent implements OnInit {
     }),
   });
 
+  /* This component uses the FormService to get data */
   constructor(private formService: FormService) {
   }
 
-  // functions to get the states and provices
+  // functions to get the states and provices from the service
   getStates(): void {
     this.formService.getStates()
         .subscribe(states => this.states = states);
@@ -40,7 +44,7 @@ export class UsersurveyComponent implements OnInit {
   }
 
 
-  // register for when the country changes.
+  // register for when the country changes to get the appropriate state/provice abbreviations.
   ngOnInit() {
     this.getStates();
     const val: FormControl = this.userProfile.get('address.country') as FormControl;

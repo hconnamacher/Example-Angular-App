@@ -1,19 +1,21 @@
+<!-- The Usersurvey component is a form for entering name and address -->
 <form [formGroup] = "userProfile">
-  <label>First name: <input type="text" formControlName="firstName"></label>
-  <label>Last name: <input type="text" formControlName="lastName"></label>
+  <label>First name: <mat-form-field><input matInput formControlName="firstName"></mat-form-field></label>
+  <label>Last name: <mat-form-field><input matInput formControlName="lastName"></mat-form-field></label>
   <div formGroupName="address">
-    <label>Street: <input type="text" formControlName="street"></label>
-    <label>City: <input type="text" formControlName="city"></label>
-    <label for="state" *ngIf="userProfile.value.address.country === 'United States'">State: </label>
-    <label for="state" *ngIf="userProfile.value.address.country === 'Canada'">Province: </label>
-    <select id="state" formControlName="state">
-      <option *ngFor="let state of states">{{state}}</option>
-    </select>
-    <label for="country">Country</label>
-    <select id="country" formControlName="country">
-      <option>Canada</option>
-      <option>United States</option>
-    </select>
+    <label>Street: <mat-form-field><input matInput formControlName="street"></mat-form-field></label>
+    <label>City: <input matInput type="text" formControlName="city"></label>
+    <label for="state"> <span *ngIf="userProfile.value.address.country === 'United States'">State:</span>
+                        <span *ngIf="userProfile.value.address.country === 'Canada'">Province: </span>
+    </label>
+    <mat-form-field><mat-select id="state" formControlName="state">
+      <mat-option *ngFor="let state of states" value="state">{{state}}</mat-option>
+    </mat-select></mat-form-field>
+    <label for="country">Country</label><mat-form-field>
+    <mat-select id="country"   formControlName="country">
+      <mat-option value="Canada">Canada</mat-option>
+      <mat-option value="United States">United States</mat-option>
+    </mat-select></mat-form-field>
   </div>
  
 </form>

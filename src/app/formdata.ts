@@ -1,3 +1,6 @@
+/* This file contains data used by the form.
+ * This data could have been sent by the server instead.
+ */
 export const STATES: string[] = [
   'AL',
   'AK',

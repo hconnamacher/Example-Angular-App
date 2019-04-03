@@ -1,3 +1,4 @@
+/* The typescript for the main component of the application */
 import { Component } from '@angular/core';
 
 @Component({

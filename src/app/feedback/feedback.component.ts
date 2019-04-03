@@ -1,7 +1,8 @@
+/* The script to control the user feedback application.
+ * It includes an example of input validation.
+ */
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { getFirstTemplatePass } from '@angular/core/src/render3/state';
-import { parseTemplate } from '@angular/compiler';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-feedback',
@@ -10,29 +11,27 @@ import { parseTemplate } from '@angular/compiler';
 })
 
 export class FeedbackComponent implements OnInit {
-  // public messageForm: FormGroup;
   public success = false;
   public submitted = false;
 
-  favoriteColorControl = new FormControl('purple');
-
-  // pet = new FormControl('');
+  // the user must enter a pet and a password, and password must be >= 6 characters
   messageForm = new FormGroup({
     pet: new FormControl('', Validators.required),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    color: new FormControl('purple')
   });
+
+  favoriteColorControl = this.messageForm.get('color');
+
+  // the function gives a different error depending on which validation failed.
+  getPasswordError() {
+    return this.password().hasError('required') ? 'A password is required' :
+           this.password().hasError('minlength') ? 'A password must be at least 6 characters' :
+           'Something is wrong';
+  }
 
   constructor() {
   }
-
-  /*
-  constructor(private formBuilder: FormBuilder) {
-    this.messageForm = this.formBuilder.group({
-      pets : ['', Validators.required],
-      password : ['', Validators.required]
-    });
-   }
-   */
 
    onSubmit() {
      this.submitted = true;
@@ -47,6 +46,8 @@ export class FeedbackComponent implements OnInit {
     }
   }
 
+  // these helper functions return the individual FormContols so the
+  //  html component can have access to then.
   password() {return this.messageForm.get('password'); }
   pet() {return this.messageForm.get('pet'); }
 }

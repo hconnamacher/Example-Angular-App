@@ -1,4 +1,6 @@
-<form ngSubmit='editProject()'>
+<!-- The component to display a project.  Typically a header is shown,
+     But if toggleDispaly() is true, it shows a form where the project data ca be changed. -->
+<form [formGroup]="projectForm" ngSubmit='editProject()'>
 <div class="listing">
 <span (click)='toggleDisplay()' class="badge" [class.selected]='displayAll'>Project {{project.id}}: </span>
  {{project.name}}

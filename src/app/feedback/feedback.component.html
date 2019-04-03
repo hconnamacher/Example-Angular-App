@@ -1,24 +1,29 @@
+<!-- A user survey form.  Includes messages if the user fails to enter required data -->
 <h2>Feedback</h2>
 
   <app-usersurvey></app-usersurvey>
 
   <hr />
 
-  <form [formGroup] = "messageForm" (ngSubmit) = "onSubmit()">
-     Favorite Color: <input type="text" [formControl]="favoriteColorControl"><br />
-     <label>List your favorite pet: <span *ngIf="submitted && pet().errors">Please enter a pet</span><br>
-       <input type="radio" formControlName="pet" value="dog">Dog<br>
-       <input type="radio" formControlName="pet" value="cat">Cat<br>
-       <input type="radio" formControlName="pet" value="none">None
+  <form [formGroup] = "messageForm" (ngSubmit) = "onSubmit()" class="app-dark-theme">
+     Favorite Color: <mat-form-field><input matInput [formControl]="favoriteColorControl"></mat-form-field><br />
+     <label>List your favorite pet: <br />
+        <mat-radio-group formControlName="pet">
+          <mat-radio-button value="dog">Dog</mat-radio-button><br />
+          <mat-radio-button value="cat">Cat</mat-radio-button><br />
+          <mat-radio-button value="none">None</mat-radio-button><br />
+          <mat-error *ngIf="submitted && pet().errors">Please enter a pet</mat-error>
+        </mat-radio-group>
      </label>
      <br>
-     <Label>Enter your password:
-       <input type="password" formControlName="password"><br />
-       <span *ngIf="password().errors">Please enter a longer password</span>
-     </Label>
+     <label>Enter your password:
+       <mat-form-field><input matInput type="password" formControlName="password">
+      <mat-error *ngIf="password().invalid">{{getPasswordError()}}</mat-error>
+      </mat-form-field><br />
+     </label>
      <br>
-     <input type="submit" value="sendMessage">
-     <input type="reset">
+     <button mat-raised-button type="submit" class="mat-accent">Send</button>
+     <button mat-raised-button type="reset" class="mat-primary">Reset</button>
      <br />
     <br />
   </form>
